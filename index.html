@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPK_M</title>
+    <title>Rem&Service</title>
     <style>
         /* Общие стили */
 
@@ -35,6 +35,667 @@
         .parallax-section2 {
             min-height: 100vh;
             background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            text-shadow: 1px 1px 2px #222, 0 0 1em #222, 0 0 0.2em #222;
+        }
+
+        /* Обычные секции (без параллакса) */
+
+        .normal-section {
+            padding: 50px 20px;
+            background: #222;
+            color: white;
+        }
+
+        /* Фоны для разных секций */
+
+        .hero {
+            background-image: url("img/011.jpg");
+        }
+
+        .project-1 {
+            background-image: url("img/004.jpg");
+        }
+
+        .project-2 {
+            background-image: url('img/002.png');
+        }
+
+        .project-3 {
+            background-image: url("img/003.jpg");
+        }
+
+        /* Стили для контента */
+
+        .content {
+            border-radius: 0px;
+        }
+
+        .content2 {
+            background: rgba(0, 0, 0, 0.0);
+            padding: 40px;
+            border-radius: 0px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .text-content {
+            width: 55%;
+        }
+
+        /* Стили для ссылок */
+
+        .project-link {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px #222, 0 0 1em #222, 0 0 0.2em #222;
+            font-size: 1.2em;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            transform: scale(1.2);
+            color: orange;
+            text-shadow: 5px 5px 5px #222, 0 0 1em #222, 0 0 0.2em #222;
+        }
+
+        /* Кнопка "Наверх" */
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(34, 34, 34, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+            text-shadow: 1px 1px 2px #222, 0 0 1em #222, 0 0 0.2em #222;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: rgba(68, 68, 68, 0.9);
+        }
+
+        /* Стили для карусели (правая часть) */
+
+        .carousel-wrapper {
+            width: 40%;
+            position: relative;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            background: rgba(0, 0, 0, 0);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 10;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: white;
+        }
+
+        /* Стили для дополнительных ссылок */
+
+        .related-links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .related-links h3 {
+            margin-bottom: 15px;
+            color: orange;
+        }
+
+        .related-link {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 10px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .related-link:hover {
+            color: orange;
+            text-decoration: underline;
+        }
+
+        /* Адаптация для мобильных */
+
+        @media (max-width: 768px) {
+            .content2 {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .text-content,
+            .carousel-wrapper {
+                width: 100%;
+            }
+
+            .carousel-wrapper {
+                margin-top: 30px;
+            }
+
+            .carousel-image {
+                height: 200px;
+            }
+
+            .carousel-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            .carousel-dots {
+                margin-top: 10px;
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .normal-section {
+                padding: 30px 15px;
+            }
+
+            .project-link {
+                font-size: 1.1em;
+                margin: 8px 0;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .related-links {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-image {
+                height: 180px;
+            }
+
+            .content2 {
+                padding: 15px;
+            }
+
+            .normal-section {
+                padding: 25px 10px;
+            }
+
+            .project-link {
+                font-size: 1em;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .related-link {
+                display: block;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Главный экран с параллаксом -->
+    <section class="parallax-section hero">
+        <div class="content">
+            <br>
+            <h1>Рем&Сервiс</h1>
+            <h3>Якісний ремонт ЖК (LCD), LED, плазмових телевізорів<br> та ноутбукiв.</h3>
+            <br>
+            <a href="#tv" class="project-link">Ремонт телевізорів</a>
+            <a href="#book" class="project-link">Ремонт ноутбукiв</a>
+            <a href="#contacts" class="project-link">Контакти</a>
+        </div>
+    </section>
+
+    <!-- Обычная секция (без параллакса) -->
+    <section class="normal-section" id="tv">
+        <h2>Ремонт телевізорів</h2>
+        <p>Сьогодні телевізори-це повноцінні мультимедійні центри. Крім звичайного ефіру і кабельного, вони можуть виходити в інтернет, запускати додатки і навіть ігри. Сучасні телевізори-це надійні пристрої, які виходять з ладу дуже рідко. Але коли це відбуватиметься ремонт повинен виконуватися кваліфікованим фахівцем з достатнім досвідом</p>
+    </section>
+
+    <!-- Первая параллакс-секция с каруселью -->
+    <section class="parallax-section2 project-1">
+        <div class="content2">
+            <div class="text-content">
+                <h2>Якісний ремонт ЖК (LCD), LED та плазмових телевізорів вдома з гарантією 1 рік.</h2>
+                <p>Ремонт проводиться комплексний з профілактикою, що дозволяє запобігти майбутнім поломкам.</p>
+                <p>Наявність спеціального обладнання дозволяє проводити заміну чіпів BGA та їх реболлінг.</p>
+                <p>Відновлення програмного забезпечення телевізора</p>
+                <p>Заміна світлодіодного підсвічування вдома на більшості моделей телевізорів з діагоналлю до 50". Підсвічування встановлюється тільки нове з гарантією 1 рік.</p>
+                <p>Налаштування та прошивка телевізорів та приставок на Android.</p>
+                <p>Досвід роботи понад 20 років. Виклик майстра безкоштовний. Доступні ціни..</p>
+
+                <div class="related-links">
+
+                    <a href="#book" class="related-link">💻 Ремонт ноутбукiв</a>
+                    <br>
+                    <a href="#contacts" class="related-link">📞 Контакти</a>
+                </div>
+
+                <!-- Кнопка оставить заявку -->
+                <button class="request-btn" onclick="openModal()">📝 Оставить заявку</button>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно с формой заявки -->
+    <div id="requestModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Оставить заявку</h2>
+            <form id="requestForm" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label for="name">Имя:</label>
+                    <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="device">Устройство:</label>
+                    <input type="text" id="device" name="device" placeholder="Модель устройства" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="issue">Что не работает:</label>
+                    <textarea id="issue" name="issue" rows="4" placeholder="Опишите проблему..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
+
+    </div>
+
+    </div>
+    </section>
+
+    <!-- Обычная секция -->
+    <section class="normal-section" id="book">
+        <h2>Ремонт ноутбукiв</h2>
+        <p>Ноутбук-це пристрій, який корисний, зручний і незамінний в поїздках. Його покупка, як і ремонт, обходяться не завжди дешево. При цьому, вивести ноутбук з ладу набагато простіше, ніж зіпсувати стаціонарний комп'ютер. Що ж робити, якщо ноутбук все-таки зламався?</p>
+    </section>
+
+    <!-- Вторая параллакс-секция с каруселью -->
+    <section class="parallax-section2 project-2">
+        <div class="content2">
+            <div class="text-content">
+                <h2>Безкоштовна діагностика при ремонті,
+                    гарантія та прозорі ціни</h2>
+                <p>Чистка, заміна деталей</p>
+                <p>Апгрейд: установка SSD і прискорення системи</p>
+                <p>Ремонт після залиття"</p>
+                <p>Оптимiзацiя</p>
+
+                <div class="related-links">
+                    <a href="#tv" class="related-link">📺 Ремонт телевізорів</a>
+                    <br>
+                    <a href="#contacts" class="related-link">📞 Контакти</a>
+                </div>
+
+
+                <!-- Кнопка оставить заявку -->
+                <button class="request-btn" onclick="openModal()">📝 Оставить заявку</button>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно с формой заявки -->
+    <div id="requestModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Оставить заявку</h2>
+            <form id="requestForm" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label for="name">Имя:</label>
+                    <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="device">Устройство:</label>
+                    <input type="text" id="device" name="device" placeholder="Модель устройства" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="issue">Что не работает:</label>
+                    <textarea id="issue" name="issue" rows="4" placeholder="Опишите проблему..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        .contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .contact-item,
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .contact-item span,
+        .contact-link span {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Стили для кнопки заявки */
+        .request-btn {
+            width: 100%;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 8px;
+            color: orange;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .request-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+            background: linear-gradient(45deg, #00d2ff, #0066ff);
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 90%;
+            height: 90%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e2a3a, #0f1a2a);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideIn 0.4s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 35px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: white;
+        }
+
+        .modal-content h2 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 28px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 102, 255, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00c6fb;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(0, 198, 251, 0.2);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #00c6fb, #005bea);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.4);
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <script>
+        function openModal() {
+            document.getElementById('requestModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Запрещаем скролл фона
+        }
+
+        function closeModal() {
+            document.getElementById('requestModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Разрешаем скролл фона
+        }
+
+        // Закрытие по клику вне модального окна
+        window.onclick = function(event) {
+            const modal = document.getElementById('requestModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Зак            background-attachment: fixed;
             background-position: center;
             background-size: cover;
             display: flex;
@@ -3470,6 +4131,7 @@
 </body>
 
 </html>
+
 
 
 
