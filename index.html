@@ -704,25 +704,28 @@
 
         // Обработка отправки формы
         function submitForm(event) {
-            event.preventDefault();
-
-            // Здесь можно добавить AJAX запрос для отправки данных на сервер
-            const formData = {
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                device: document.getElementById('device').value,
-                issue: document.getElementById('issue').value
-            };
-
-            console.log('Данные формы:', formData);
-
-            // Показываем сообщение об успешной отправке
-            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
-
-            // Очищаем форму и закрываем модальное окно
+    event.preventDefault();
+    
+    const formData = new FormData(document.getElementById('requestForm'));
+    
+    fetch('save_request.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data === 'ok') {
+            alert('Спасибо! Заявка сохранена. Мы свяжемся с вами.');
             document.getElementById('requestForm').reset();
             closeModal();
+        } else {
+            alert('Ошибка при сохранении');
         }
+    })
+    .catch(error => {
+        alert('Ошибка сети');
+    });
+}
 
         // Маска для телефона (простая версия)
         document.getElementById('phone').addEventListener('input', function(e) {
@@ -826,3 +829,4 @@
 </body>
 
 </html>
+
